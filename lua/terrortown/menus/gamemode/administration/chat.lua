@@ -62,11 +62,6 @@ function CLGAMEMODESUBMENU:Populate(parent)
         label = "label_locational_voice",
     })
 
-    local enbLocVoiceTeam = form3:MakeCheckBox({
-        serverConvar = "ttt_locational_voice_team",
-        label = "label_locational_voice_team",
-    })
-
     form3:MakeHelp({
         label = "help_locational_voice_prep",
         master = enbLocVoice,
