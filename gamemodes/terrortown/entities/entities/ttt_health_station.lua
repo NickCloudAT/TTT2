@@ -16,6 +16,7 @@ end
 
 ENT.Base = "ttt_base_placeable"
 ENT.Model = "models/props/cs_office/microwave.mdl"
+ENT.CanUseKey = false --Specifically set to false to make Continuous use possible
 
 ENT.CanHavePrints = true
 ENT.MaxHeal = 25

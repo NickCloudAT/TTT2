@@ -524,7 +524,7 @@ local function SpecUseKey(ply, ent)
     end
 end
 
-local function EntityContinuousUse(ent, ply)
+local function EntityUse(ent, ply)
     ---
     -- @realm server
     if hook.Run("PlayerUse", ply, ent) then
@@ -558,33 +558,6 @@ local function EntityContinuousUse(ent, ply)
 
         return
     end
-
-    -- if it is a SENT, this will always return true
-    -- if it is a map entity, the flag will be checked
-    if not ent:IsUsableEntity(FCAP_CONTINUOUS_USE) then
-        return
-    end
-
-    -- make sure it is called 10 times per second
-    timer.Simple(0.1, function()
-        if not IsValid(ent) or not IsValid(ply) then
-            return
-        end
-
-        -- make sure the use key is still pressed
-        if not ply:KeyDown(IN_USE) then
-            return
-        end
-
-        -- make sure the entity is still in a good position
-        local distance = ply:GetShootPos():Distance(ent:WorldSpaceCenter())
-
-        if distance > 100 + ent:BoundingRadius() then
-            return
-        end
-
-        EntityContinuousUse(ent, ply)
-    end)
 end
 
 ---
@@ -617,7 +590,7 @@ net.Receive("TTT2PlayerUseEntity", function(len, ply)
         return
     end
 
-    EntityContinuousUse(ent, ply)
+    EntityUse(ent, ply)
 end)
 
 ---
